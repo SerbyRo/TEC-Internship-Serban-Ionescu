@@ -70,5 +70,20 @@ namespace Internship.Controllers
             else
                 return BadRequest();
         }
+
+        [HttpDelete("{Id}")]
+        public IActionResult Delete(int Id)
+        {
+            var db = new APIDbContext();
+            Person person = db.Persons.Find(Id);
+            if (person == null)
+                return NotFound();
+            else
+            {
+                db.Persons.Remove(person);
+                db.SaveChanges();
+                return NoContent();
+            }
+        }
     }
 }
