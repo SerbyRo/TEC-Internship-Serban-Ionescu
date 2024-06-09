@@ -1,10 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ApiApp.Model;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Internship.Model
 {
     public class Person
     {
+        public Person() {
+            PersonDetails = new HashSet<PersonDetails>();
+        }
         [Key]
         public int Id { get; set; }
         [Required]
@@ -23,6 +27,8 @@ namespace Internship.Model
         [ForeignKey("Salary")]
         public int SalaryId { get; set; }
         public Salary Salary { get; set; }
+
+        public virtual ICollection<PersonDetails> PersonDetails { get; set; }
 
     }
 }

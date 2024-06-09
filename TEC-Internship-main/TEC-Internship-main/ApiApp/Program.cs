@@ -1,3 +1,6 @@
+using ApiApp.Model;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +10,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+/*builder.Services.AddDbContext<IdentityContext>(options =>
+options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));*/
+//didn't really 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -17,7 +23,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
-
+app.UseAuthentication();
 app.MapControllers();
+app.MapRazorPages();
 
 app.Run();
